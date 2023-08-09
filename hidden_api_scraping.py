@@ -58,7 +58,7 @@ class On_Running_Crawler(scrapy.Spider):
             
             result={}
             result['Product_name'] = name
-            result['Product_url'] = prod_url
+            result['Product_url'] = 'https://www.on-running.com/en-ch' + prod_url
             result['Product_stock'] = stock
             result['Product_price'] = price
             result['Product_skus'] = skus
@@ -113,8 +113,8 @@ class On_Running_Crawler(scrapy.Spider):
     def parse_back(self, response):
         response_data = response.json()
         try:
-            product_details = response_data['data']['pageCollection']['items'][0]['seo']
-            desc = product_details['description']
+            product_details = response_data['data']['pageCollection']['items'][0]
+            desc = product_details['content']['productStyle']['description'].replace('\n', '')
 
             result = response.meta['result']
             result['Product_description'] = desc
