@@ -1,9 +1,8 @@
 import scrapy
 from scrapy.crawler import CrawlerProcess
 import pandas as pd
-import requests
 from scrapy.http import Request
-import json
+
 
 class On_Running_Crawler(scrapy.Spider):
     name = "on_running_crawler"
