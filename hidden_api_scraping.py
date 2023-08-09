@@ -1,10 +1,10 @@
 import scrapy
 from scrapy.crawler import CrawlerProcess
-import pandas as pd
 from scrapy.http import Request
-
+import logging
 
 class On_Running_Crawler(scrapy.Spider):
+    logging.basicConfig(level=logging.INFO)
     name = "on_running_crawler"
     headers = {
             'authority': 'algolia.on-running.com',
@@ -45,7 +45,7 @@ class On_Running_Crawler(scrapy.Spider):
         totalPages=int(response_data.get('results')[0].get('nbPages'))
         current_page=int(response_data.get('results')[0].get('page'))
 
-        print(f"Page number: {current_page}")
+        logging.info(f"Page number: {current_page}")
         hits = response_data['results'][0]['hits']
         for item in hits:
             name = item['name']
